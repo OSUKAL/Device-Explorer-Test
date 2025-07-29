@@ -1,8 +1,11 @@
-using Test.Common.Enums;
-using Test.Model;
+using Test.Models;
+using Test.Models.Enums;
 
-namespace Test.ViewModel;
+namespace Test.ViewModels;
 
+/// <summary>
+/// Модель представления данных устройства
+/// </summary>
 public class DeviceViewModel : ViewModelBase
 {
     private readonly Device _device;

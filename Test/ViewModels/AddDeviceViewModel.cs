@@ -1,22 +1,28 @@
 using System.Windows.Input;
-using Test.Command;
-using Test.Common.Enums;
-using Test.Model;
-using Test.Store;
+using Test.Commands;
+using Test.Models;
+using Test.Models.Enums;
+using Test.Services;
 
-namespace Test.ViewModel;
+namespace Test.ViewModels;
 
+/// <summary>
+/// Модель представления добавления устройства
+/// </summary>
 public class AddDeviceViewModel : ViewModelBase
 {
     private string _name;
     private string _serialNumber;
     private DeviceCategory _category = DeviceCategory.Other;
     private DeviceStatus _status = DeviceStatus.Working;
-    private DateTime _installationDate = new DateTime(2025, 7, 28);
+    private DateTime _installationDate = DateTime.Now;
     
     public IEnumerable<DeviceCategory> DeviceCategories => Enum.GetValues(typeof(DeviceCategory)).Cast<DeviceCategory>();
     public IEnumerable<DeviceStatus> DeviceStatuses => Enum.GetValues(typeof(DeviceStatus)).Cast<DeviceStatus>();
 
+    /// <summary>
+    /// Название
+    /// </summary>
     public string Name
     {
         get => _name;
@@ -27,6 +33,9 @@ public class AddDeviceViewModel : ViewModelBase
         }
     }
 
+    /// <summary>
+    /// Серийный номер
+    /// </summary>
     public string SerialNumber
     {
         get => _serialNumber;
@@ -37,6 +46,9 @@ public class AddDeviceViewModel : ViewModelBase
         }
     }
     
+    /// <summary>
+    /// Категория
+    /// </summary>
     public DeviceCategory Category
     {
         get => _category;
@@ -47,6 +59,9 @@ public class AddDeviceViewModel : ViewModelBase
         }
     }
     
+    /// <summary>
+    /// Статус
+    /// </summary>
     public DeviceStatus Status
     {
         get => _status;
@@ -57,6 +72,9 @@ public class AddDeviceViewModel : ViewModelBase
         }
     }
     
+    /// <summary>
+    /// Время установки
+    /// </summary>
     public DateTime InstallationDate
     {
         get => _installationDate;
@@ -67,12 +85,19 @@ public class AddDeviceViewModel : ViewModelBase
         }
     }
     
+    /// <summary>
+    /// Команда добавления устройтва
+    /// </summary>
     public ICommand SubmitCommand { get; }
+    /// <summary>
+    /// Команда отмены добавления 
+    /// </summary>
     public ICommand CancelCommand { get; }
 
-    public AddDeviceViewModel(DeviceList deviceList, NavigationStore navigationStore, Func<DeviceListViewModel> createDeviceListViewModel)
+    /// <inheritdoc cref="AddDeviceViewModel"/>
+    public AddDeviceViewModel(DeviceList deviceList, NavigationService deviceListViewNavigationService)
     {
-        SubmitCommand = new AddDeviceCommand(this, deviceList);
-        CancelCommand = new NavigateCommand(navigationStore, createDeviceListViewModel);
+        SubmitCommand = new AddDeviceCommand(this, deviceList, deviceListViewNavigationService);
+        CancelCommand = new NavigateCommand(deviceListViewNavigationService);
     }
 }

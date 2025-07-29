@@ -1,8 +1,11 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Test.ViewModel;
+namespace Test.ViewModels;
 
+/// <summary>
+/// Базовый класс для моделей представления
+/// </summary>
 public abstract class ViewModelBase : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;

@@ -3,7 +3,7 @@ using System.Windows;
 using Test.Models;
 using Test.ViewModels;
 
-namespace Test.Commands.DeviceList;
+namespace Test.Commands;
 
 public class RemoveDeviceCommand : CommandBase
 {

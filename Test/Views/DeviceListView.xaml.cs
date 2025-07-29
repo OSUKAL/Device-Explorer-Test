@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace Test.View;
+namespace Test.Views;
 
 public partial class DeviceListView : UserControl
 {

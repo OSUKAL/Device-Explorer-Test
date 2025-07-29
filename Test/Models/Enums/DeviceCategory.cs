@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Test.Common.Enums;
+namespace Test.Models.Enums;
 
 /// <summary>
 /// Категория устройства

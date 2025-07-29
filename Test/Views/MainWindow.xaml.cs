@@ -1,7 +1,6 @@
 using System.Windows;
-using Test.ViewModel;
 
-namespace Test.View;
+namespace Test.Views;
 
 /// <summary>
 /// Interaction logic for MainWindow.xaml

@@ -1,6 +1,6 @@
-using Test.Common.Enums;
+using Test.Models.Enums;
 
-namespace Test.Model;
+namespace Test.Models;
 
 /// <summary>
 /// Данные устройства
@@ -35,5 +35,21 @@ public class Device
     public bool Conflicts(Device device)
     {
         return device.SerialNumber == SerialNumber;
+    }
+    
+    public override bool Equals(object obj)
+    {
+        return obj is Device device && 
+               Name == device.Name &&
+               SerialNumber == device.SerialNumber &&
+               Status == device.Status &&
+               Category == device.Category &&
+               InstallationDate == device.InstallationDate;
+        
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Name, (int)Status, (int)Category, SerialNumber, InstallationDate);
     }
 }

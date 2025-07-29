@@ -1,11 +1,11 @@
 using Test.Store;
 
-namespace Test.ViewModel;
+namespace Test.ViewModels;
+
 
 public class MainViewModel : ViewModelBase
 {
     private readonly NavigationStore _navigationStore;
-    
     public ViewModelBase CurrentViewModel => _navigationStore.CurrentViewModel;
 
     public MainViewModel(NavigationStore navigationStore)
