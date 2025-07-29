@@ -1,0 +1,25 @@
+<Window x:Class="Test.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Test"
+        xmlns:views="clr-namespace:Test.View"
+        xmlns:vms="clr-namespace:Test.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="600"
+        Width="1000"
+        FontSize="14">
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate DataType="{x:Type vms:AddDeviceViewModel}">
+                <views:AddDeviceView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vms:DeviceListViewModel}">
+                <views:DeviceListView/>
+            </DataTemplate>
+        </Grid.Resources>
+        <ContentControl Content="{Binding CurrentViewModel}"/>
+    </Grid>
+</Window>

@@ -1,0 +1,233 @@
+<UserControl x:Class="Test.View.DeviceListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Test.View"
+             xmlns:infrastructure="clr-namespace:Test.Infrastructure"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <infrastructure:EnumDescriptionConverter x:Key="DescriptionConverter"/>
+        <CollectionViewSource x:Key="Devices" Source="{Binding Devices}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Category" Converter="{StaticResource DescriptionConverter}" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+    <Grid ShowGridLines="True">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.5*" />
+            <ColumnDefinition Width="2.5*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Background="RoyalBlue"
+                Foreground="WhiteSmoke"
+                FontSize="20"
+                Padding="10 5"
+                Text="Список устройств" />
+
+            <StackPanel Grid.Row="1">
+                <TextBlock
+                    Text="Поиск по названию"
+                    Margin="10 5 0 5" />
+                <TextBox Text="" />
+            </StackPanel>
+
+            <StackPanel Grid.Row="2">
+                <TextBlock
+                    Text="Фильтр по статусу"
+                    Margin="10 5 0 5" />
+                <ComboBox
+                    ItemsSource="{Binding DeviceStatuses}"
+                    SelectedItem="{Binding SelectedStatus}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource DescriptionConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <ListView
+                Grid.Row="3"
+                ItemsSource="{Binding Source={StaticResource Devices}}"
+                SelectedItem="{Binding SelectedDevice}">
+                <ListView.Resources>
+                    <Style TargetType="GridViewColumnHeader">
+                        <Setter Property="Template" Value="{x:Null}" />
+                    </Style>
+                </ListView.Resources>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <Button
+                Grid.Row="4"
+                Content="Добавить устройство"
+                Command="{Binding AddDeviceCommand}" />
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Background="RoyalBlue"
+                Foreground="WhiteSmoke"
+                FontSize="20"
+                Padding="10 5"
+                Text="Сведения об устройстве" />
+
+            <Grid
+                Grid.Row="1"
+                Margin="10 5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    FontWeight="Bold"
+                    Text="Название" />
+                <TextBox
+                    Grid.Row="1"
+                    Margin="0 5 0 0"
+                    Text="{Binding SelectedDevice.Name, UpdateSourceTrigger=Explicit}" />
+            </Grid>
+
+            <Grid
+                Grid.Row="2"
+                Margin="10 5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    FontWeight="Bold"
+                    Text="Серийный номер" />
+                <TextBox
+                    IsEnabled="True"
+                    Grid.Row="1"
+                    Margin="0 5 0 0"
+                    Text="{Binding SelectedDevice.SerialNumber, UpdateSourceTrigger=Explicit}" />
+            </Grid>
+
+            <Grid
+                Grid.Row="3"
+                Margin="10 5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontWeight="Bold"
+                    Text="Категория" />
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0 5 0 0"
+                    Width="150"
+                    ItemsSource="{Binding DeviceCategories}"
+                    SelectedItem="{Binding SelectedDevice.Category, Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource DescriptionConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontWeight="Bold"
+                    Margin="10 0 0 0"
+                    Text="Статус" />
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10 5 0 0"
+                    Width="150"
+                    ItemsSource="{Binding DeviceStatuses}"
+                    SelectedItem="{Binding SelectedDevice.Status, Mode=OneWay}">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource DescriptionConverter}}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="10 0 0 0"
+                    FontWeight="Bold"
+                    Text="Дата установки" />
+                <DatePicker
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="10 5 0 0"
+                    Width="150" 
+                    SelectedDate="{Binding SelectedDevice.InstallationDate}"/>
+            </Grid>
+
+            <StackPanel
+                Grid.Row="4"
+                Orientation="Horizontal"
+                Margin="10 20 0 10">
+                <Button
+                    Content="Сохранить изменения"
+                    Command="{Binding SaveDeviceChangesCommand}" />
+                <Button
+                    Content="Удалить устройство"
+                    Margin="10 0 0 0"
+                    Command="{Binding RemoveDeviceCommand}" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

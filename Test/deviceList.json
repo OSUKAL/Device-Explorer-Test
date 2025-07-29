@@ -1,0 +1,44 @@
+[
+  {
+    "Name": "Монитор Iiyama 27\u0022 GB2760QSU",
+    "Status": 0,
+    "Category": 0,
+    "SerialNumber": "123ADW",
+    "InstallationDate": "2025-07-29T21:25:18.4511293+10:00"
+  },
+  {
+    "Name": "Клавиатура FLESPORTS FL750",
+    "Status": 1,
+    "Category": 0,
+    "SerialNumber": "345634SADA",
+    "InstallationDate": "2025-07-29T21:26:19.9442735+10:00"
+  },
+  {
+    "Name": "OSUKAL PC",
+    "Status": 0,
+    "Category": 3,
+    "SerialNumber": "563WERV353",
+    "InstallationDate": "2025-07-29T21:27:16.6480815+10:00"
+  },
+  {
+    "Name": "Принтер Brother HL-1110R",
+    "Status": 2,
+    "Category": 2,
+    "SerialNumber": "234SDFWEV2354",
+    "InstallationDate": "2025-07-29T21:27:34.0539084+10:00"
+  },
+  {
+    "Name": "Принтер HP Laserjet P1102",
+    "Status": 0,
+    "Category": 2,
+    "SerialNumber": "P23V4234V25625",
+    "InstallationDate": "2025-07-29T21:28:29.6578006+10:00"
+  },
+  {
+    "Name": "Сетевое хранилище QNAP TS-133",
+    "Status": 0,
+    "Category": 1,
+    "SerialNumber": "345342RWSWERWV",
+    "InstallationDate": "2025-07-29T21:29:13.722705+10:00"
+  }
+]
